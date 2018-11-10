@@ -13,47 +13,115 @@ Definitions and Naming
   - The part of a filepath that names the file, including its extension.
 
 * Rootname
-  - The part of a basename that precedes the first '.' (the filename segment delimiter).
+  - The part of a basename that precedes the last '.' (the filename segment delimiter).
 
 * Extname
-  - The part of a basename that comes after the first filename segment delimiter (the first '.').
+  - The part of a basename that comes after the last filename segment delimiter (the first '.').
 
 Examples
 
 ```
-	print
-	print "create sphere A from filepath"
-	fsphA = Filesphere(filepath='/my/dir/name/A/myrootnameA.myextnameA')
-	fsphA.show()
-	print
+>>> from filespherapy.tools import Filesphere
+>>> print "create sphere A from filepath"
+create sphere A from filepath
+>>> fsphA = Filesphere(filepath='/my/dir/name/A/mystemnameA.myextnameA')
+>>> print fsphA
 
-	print "create sphere B from dirname, basename"
-	fsphB = Filesphere(dirname='/my/dir/name/B', basename='myrootnameB.myextnameB')
-	fsphB.show()
-	print
+                  extname: .myextnameA
+                 basename: mystemnameA.myextnameA
+                  dirname: /my/dir/name/A
+                 stemname: mystemnameA
+                 filepath: /my/dir/name/A/mystemnameA.myextnameA
 
-	print "create sphere C from dirname, rootname, extname"
-	fsphC = Filesphere(dirname='/my/dir/name/C', rootname='myrootnameC', extname='myextnameC')
-	fsphC.show()
-	print
+>>> fsphA.show_filepath()
+/my/dir/name/A/mystemnameA.myextnameA
+>>> fsphA.show_dirname()
+/my/dir/name/A
+>>> fsphA.show_basename()
+mystemnameA.myextnameA
+>>> fsphA.show_stemname()
+mystemnameA
+>>> fsphA.show_extname()
+.myextnameA
+>>> print "create sphere B from dirname, basename"
+create sphere B from dirname, basename
+>>> fsphB = Filesphere(dirname='/my/dir/name/B', basename='mystemnameB.myextnameB')
+>>> print fsphB
 
-	print "update the dirname of A"
-	fsphA.update(dirname='/my/new/dir/name')
-	fsphA.show()
-	print
+                  extname: .myextnameB
+                 basename: mystemnameB.myextnameB
+                  dirname: /my/dir/name/B
+                 stemname: mystemnameB
+                 filepath: /my/dir/name/B/mystemnameB.myextnameB
 
-	print "update the basename of B"
-	fsphB.update(basename='mynew.basename')
-	fsphB.show()
-	print
+>>> print "create sphere C from dirname, stemname, extname"
+create sphere C from dirname, stemname, extname
+>>> fsphC = Filesphere(dirname='/my/dir/name/C', stemname='mystemnameC', extname='myextnameC')
+>>> print fsphC
 
-	print "update the rootname of C"
-	fsphC.update(rootname='newroot')
-	fsphC.show()
-	print
+                 basename: mystemnameC.myextnameC
+                  dirname: /my/dir/name/C
+                 filepath: /my/dir/name/C/mystemnameC.myextnameC
+                 stemname: mystemnameC
+                  extname: myextnameC
 
-	print "finally, also update the extname of C"
-	fsphC.update(extname='newext')
-	fsphC.show()
-	print
+>>>
+>>> print "update the dirname of A"
+update the dirname of A
+>>> fsphA.update(dirname='/my/new/dir/name')
+>>> print fsphA
+
+                  extname: .myextnameA
+                 basename: mystemnameA.myextnameA
+                  dirname: /my/new/dir/name
+                 stemname: mystemnameA
+                 filepath: /my/new/dir/name/mystemnameA.myextnameA
+
+>>>
+>>> print "update the basename of B"
+update the basename of B
+>>> fsphB.update(basename='mynew.basename')
+>>> print fsphB
+
+                  extname: .basename
+                 basename: mynew.basename
+                  dirname: /my/dir/name/B
+                 stemname: mynew
+                 filepath: /my/dir/name/B/mynew.basename
+
+>>>
+>>> print "update the stemname of C"
+update the stemname of C
+>>> fsphC.update(stemname='newroot')
+ my new stemname: newroot
+ tmp_basename: mystemnameC.myextnameC
+ tmp_extname: .myextnameC
+>>> print fsphC
+
+                 basename: mystemnameC.myextnameC
+                  dirname: /my/dir/name/C
+                 filepath: /my/dir/name/C/newroot.myextnameC
+                 stemname: newroot
+                  extname: myextnameC
+
+>>>
+>>> print "also update the extname of C"
+also update the extname of C
+>>> fsphC.update(extname='newext')
+ my new extname: newext
+ basename: newroot.myextnameC
+ stemname: newroot
+>>> print fsphC
+
+                 basename: mystemnameC.myextnameC
+                  dirname: /my/dir/name/C
+                 filepath: /my/dir/name/C/newroot.newext
+                 stemname: newroot
+                  extname: newext
+
+>>>
+>>> print "filepath with multiple filename segment delimiters ('.')"
+filepath with multiple filename segment delimiters ('.')
+>>> fsphD = Filesphere(filepath='/my/dir/name/D/stemname.D.extname')
+>>>
 ```
