@@ -115,21 +115,40 @@ class Filesphere(object):
 			self.filepath = "{}/{}".format(self.dirname, self.basename)
 
 	def show(self):
+		printf("%20: %s\n", "filepath", self.filepath)
+		printf("%20: %s\n", "dirname", self.dirname)
+		printf("%20: %s\n", "basename", self.basename)
+		printf("%20: %s\n", "stemname", self.stemname)
+		printf("%20: %s\n", "extname", self.extname)
+
+	def show_filepath(self):
 		print self.filepath
 
-	def filepath(self):
+	def show_dirname(self):
+		print self.dirname
+
+	def show_basename(self):
+		print self.basename
+
+	def show_stemname(self):
+		print self.stemname
+
+	def show_extname(self):
+		print self.extname
+
+	def get_filepath(self):
 		return self.filepath
 
-	def dirname(self):
+	def get_dirname(self):
 		return self.dirname
 
-	def basename(self):
+	def get_basename(self):
 		return self.basename
 
-	def stemname(self):
+	def get_stemname(self):
 		return self.stemname
 
-	def extname(self):
+	def get_extname(self):
 		return self.extname
 
 	def __repr__(self):
