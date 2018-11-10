@@ -16,22 +16,22 @@ Usage:
 
  OR
 
- fsph = Filesphere(dirname=DIRNAME, rootname=ROOTNAME, extname=EXTNAME)
+ fsph = Filesphere(dirname=DIRNAME, stemname=ROOTNAME, extname=EXTNAME)
 
 filepath = dirname + basename
 
   basename (filename)
-    basename = rootname + extname (extension)
+    basename = stemname + extname (extension)
 
 Use cases
 1. update a filesphere object by altering one or more of its elements
 
-  >>> fsphA = Filesphere(filepath='/my/dir/name/A/myrootnameA.myextnameA')
+  >>> fsphA = Filesphere(filepath='/my/dir/name/A/mystemnameA.myextnameA')
   >>> fsphA.print()
-  /my/dir/name/A/myrootnameA.myextnameA
+  /my/dir/name/A/mystemnameA.myextnameA
   >>> fsphA.update(extname='myextnameB')
   >>> fsphA.print()
-  /my/dir/name/A/myrootnameA.myextnameB
+  /my/dir/name/A/mystemnameA.myextnameB
 
   # create a new Filesphere object by cloning
   >>> fsphB = fsphB.clone()
@@ -45,7 +45,7 @@ example
 
  given a 
 
-  fsphA = Filesphere(filepath='/my/dir/name/A/myrootnameA.myextnameA')
+  fsphA = Filesphere(filepath='/my/dir/name/A/mystemnameA.myextnameA')
 
  compute a new filepath string by replacing myextnameA with myextnameB:
 
@@ -53,7 +53,7 @@ example
 
  print result
 
-  /my/dir/name/A/myrootnameA.myextnameB
+  /my/dir/name/A/mystemnameA.myextnameB
 
  also might want to work with multiple Filesphere objects
  by cloning 
@@ -64,16 +64,16 @@ example
  e.g.
   filepathA -> filepathB:
     inputs are filepathA, B:{ dirname, extension }
-    preserves the rootname, i.e. rootname preserving transformation
+    preserves the stemname, i.e. stemname preserving transformation
 
   filepathA -> dirnameA
   filepathA -> basenameA (filenameA)
-  filepathA -> rootnameA
+  filepathA -> stemnameA
   filepathA -> extensionA
 
  change dirname only (replace dirname)
  change basename only (replace basename)
- change rootname only (replace rootname)
+ change stemname only (replace stemname)
  change extension only (replace extension)
 
 methods:
@@ -91,7 +91,7 @@ class Filesphere(object):
 			self.filepath = kwargs['filepath']
 			self.dirname = os.path.dirname(self.filepath)
 			self.basename = os.path.basename(self.filepath)
-			self.rootname = os.path.splitext(self.basename)[0]
+			self.stemname = os.path.splitext(self.basename)[0]
 			if len(os.path.splitext(self.basename)) == 2:
 				self.extname = os.path.splitext(self.basename)[1]
 
@@ -101,8 +101,8 @@ class Filesphere(object):
 		if 'basename' in kwargs:
 			self.basename = kwargs['basename']
 
-		if 'rootname' in kwargs:
-			self.rootname = kwargs['rootname']
+		if 'stemname' in kwargs:
+			self.stemname = kwargs['stemname']
 
 		if 'extname' in kwargs:
 			self.extname = kwargs['extname']
@@ -110,8 +110,8 @@ class Filesphere(object):
 		if ('dirname' in kwargs and 'basename' in kwargs) and not 'filepath' in kwargs:
 			self.filepath = "{}/{}".format(self.dirname, self.basename)
 
-		elif ('dirname' in kwargs and 'rootname' in kwargs and 'extname' in kwargs) and not 'filepath' in kwargs:
-			self.basename = "{}.{}".format(self.rootname, self.extname)
+		elif ('dirname' in kwargs and 'stemname' in kwargs and 'extname' in kwargs) and not 'filepath' in kwargs:
+			self.basename = "{}.{}".format(self.stemname, self.extname)
 			self.filepath = "{}/{}".format(self.dirname, self.basename)
 
 	def show(self):
@@ -126,8 +126,8 @@ class Filesphere(object):
 	def get_basename(self):
 		return self.basename
 
-	def get_rootname(self):
-		return self.rootname
+	def get_stemname(self):
+		return self.stemname
 
 	def get_extname(self):
 		return self.extname
@@ -145,7 +145,7 @@ class Filesphere(object):
 			self.filepath = kwargs['filepath']
 			self.dirname = os.path.dirname(self.filepath)
 			self.basename = os.path.basename(self.filepath)
-			self.rootname = os.path.splitext(self.basename)[0]
+			self.stemname = os.path.splitext(self.basename)[0]
 			if len(os.path.splitext(self.basename)) == 2:
 				self.extname = os.path.splitext(self.basename)[1]
 
@@ -157,10 +157,10 @@ class Filesphere(object):
 			self.basename = kwargs['basename']
 			self.filepath = "{}/{}".format(os.path.dirname(self.filepath), self.basename)			
 
-		if 'rootname' in kwargs:
-			self.rootname = kwargs['rootname']
+		if 'stemname' in kwargs:
+			self.stemname = kwargs['stemname']
 			if DEBUGGING:
-				print " my new rootname: {}".format(self.rootname)
+				print " my new stemname: {}".format(self.stemname)
 
 			tmp_basename = os.path.basename(self.filepath)
 			if DEBUGGING:
@@ -173,14 +173,14 @@ class Filesphere(object):
 
 				self.filepath = "{}/{}{}".format(
 					os.path.dirname(self.filepath), 
-					self.rootname, 
+					self.stemname, 
 					tmp_extname
 					)
 			else:
 
 				self.filepath = "{}/{}".format(
 					os.path.dirname(self.filepath), 
-					self.rootname
+					self.stemname
 					)
 
 		if 'extname' in kwargs:
@@ -189,15 +189,15 @@ class Filesphere(object):
 				print " my new extname: {}".format(self.extname)
 
 			tmp_basename = os.path.basename(self.filepath)
-			tmp_rootname  = os.path.splitext(tmp_basename)[0]
+			tmp_stemname  = os.path.splitext(tmp_basename)[0]
 
 			if DEBUGGING:
 				print " basename: {}".format(tmp_basename)
-				print " rootname: {}".format(tmp_rootname)
+				print " stemname: {}".format(tmp_stemname)
 
 			self.filepath = "{}/{}.{}".format(
 				os.path.dirname(self.filepath), 
-				tmp_rootname, 
+				tmp_stemname, 
 				self.extname
 				)
 
@@ -206,17 +206,17 @@ if __name__ == '__main__':
 
 	print
 	print "create sphere A from filepath"
-	fsphA = Filesphere(filepath='/my/dir/name/A/myrootnameA.myextnameA')
+	fsphA = Filesphere(filepath='/my/dir/name/A/mystemnameA.myextnameA')
 	fsphA.show()
 	print
 
 	print "create sphere B from dirname, basename"
-	fsphB = Filesphere(dirname='/my/dir/name/B', basename='myrootnameB.myextnameB')
+	fsphB = Filesphere(dirname='/my/dir/name/B', basename='mystemnameB.myextnameB')
 	fsphB.show()
 	print
 
-	print "create sphere C from dirname, rootname, extname"
-	fsphC = Filesphere(dirname='/my/dir/name/C', rootname='myrootnameC', extname='myextnameC')
+	print "create sphere C from dirname, stemname, extname"
+	fsphC = Filesphere(dirname='/my/dir/name/C', stemname='mystemnameC', extname='myextnameC')
 	fsphC.show()
 	print
 
@@ -230,8 +230,8 @@ if __name__ == '__main__':
 	fsphB.show()
 	print
 
-	print "update the rootname of C"
-	fsphC.update(rootname='newroot')
+	print "update the stemname of C"
+	fsphC.update(stemname='newroot')
 	fsphC.show()
 	print
 
