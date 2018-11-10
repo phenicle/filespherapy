@@ -123,5 +123,13 @@ also update the extname of C
 >>> print "filepath with multiple filename segment delimiters ('.')"
 filepath with multiple filename segment delimiters ('.')
 >>> fsphD = Filesphere(filepath='/my/dir/name/D/stemname.D.extname')
+>>> print fsphD
+
+                  extname: .extname
+                 basename: stemname.D.extname
+                  dirname: /my/dir/name/D
+                 stemname: stemname.D
+                 filepath: /my/dir/name/D/stemname.D.extname
+
 >>>
 ```
