@@ -22,9 +22,9 @@ Examples
 
 ```
 >>> from filespherapy.tools import Filesphere
->>> print "create sphere A from filepath"
-create sphere A from filepath
->>> fsphA = Filesphere(filepath='/my/dir/name/A/mystemnameA.myextnameA')
+>>>
+>>> # create sphere A from filepath
+... fsphA = Filesphere(filepath='/my/dir/name/A/mystemnameA.myextnameA')
 >>> print fsphA
 
                   extname: .myextnameA
@@ -33,6 +33,7 @@ create sphere A from filepath
                  stemname: mystemnameA
                  filepath: /my/dir/name/A/mystemnameA.myextnameA
 
+>>>
 >>> fsphA.show_filepath()
 /my/dir/name/A/mystemnameA.myextnameA
 >>> fsphA.show_dirname()
@@ -43,9 +44,9 @@ mystemnameA.myextnameA
 mystemnameA
 >>> fsphA.show_extname()
 .myextnameA
->>> print "create sphere B from dirname, basename"
-create sphere B from dirname, basename
->>> fsphB = Filesphere(dirname='/my/dir/name/B', basename='mystemnameB.myextnameB')
+>>>
+>>> # create sphere B from dirname, basename
+... fsphB = Filesphere(dirname='/my/dir/name/B', basename='mystemnameB.myextnameB')
 >>> print fsphB
 
                   extname: .myextnameB
@@ -54,9 +55,9 @@ create sphere B from dirname, basename
                  stemname: mystemnameB
                  filepath: /my/dir/name/B/mystemnameB.myextnameB
 
->>> print "create sphere C from dirname, stemname, extname"
-create sphere C from dirname, stemname, extname
->>> fsphC = Filesphere(dirname='/my/dir/name/C', stemname='mystemnameC', extname='myextnameC')
+>>>
+>>> # create sphere C from dirname, stemname, extname
+... fsphC = Filesphere(dirname='/my/dir/name/C', stemname='mystemnameC', extname='myextnameC')
 >>> print fsphC
 
                  basename: mystemnameC.myextnameC
@@ -66,9 +67,8 @@ create sphere C from dirname, stemname, extname
                   extname: myextnameC
 
 >>>
->>> print "update the dirname of A"
-update the dirname of A
->>> fsphA.update(dirname='/my/new/dir/name')
+>>> # update the dirname of A
+... fsphA.update(dirname='/my/new/dir/name')
 >>> print fsphA
 
                   extname: .myextnameA
@@ -78,9 +78,8 @@ update the dirname of A
                  filepath: /my/new/dir/name/mystemnameA.myextnameA
 
 >>>
->>> print "update the basename of B"
-update the basename of B
->>> fsphB.update(basename='mynew.basename')
+>>> # update the basename of B
+... fsphB.update(basename='mynew.basename')
 >>> print fsphB
 
                   extname: .basename
@@ -90,9 +89,8 @@ update the basename of B
                  filepath: /my/dir/name/B/mynew.basename
 
 >>>
->>> print "update the stemname of C"
-update the stemname of C
->>> fsphC.update(stemname='newroot')
+>>> # update the stemname of C
+... fsphC.update(stemname='newroot')
  my new stemname: newroot
  tmp_basename: mystemnameC.myextnameC
  tmp_extname: .myextnameC
@@ -105,9 +103,8 @@ update the stemname of C
                   extname: myextnameC
 
 >>>
->>> print "also update the extname of C"
-also update the extname of C
->>> fsphC.update(extname='newext')
+>>> # also update the extname of C
+... fsphC.update(extname='newext')
  my new extname: newext
  basename: newroot.myextnameC
  stemname: newroot
@@ -120,9 +117,8 @@ also update the extname of C
                   extname: newext
 
 >>>
->>> print "filepath with multiple filename segment delimiters ('.')"
-filepath with multiple filename segment delimiters ('.')
->>> fsphD = Filesphere(filepath='/my/dir/name/D/stemname.D.extname')
+>>> # filepath with multiple filename segment delimiters ('.')
+... fsphD = Filesphere(filepath='/my/dir/name/D/stemname.D.extname')
 >>> print fsphD
 
                   extname: .extname
