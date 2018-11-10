@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
    name='filespherapy',
-   version='1.0.1',
+   version='1.0.2',
    description='A python library for file path construction and manipulation.',
    license="Mozilla Public License 2.0 (MPL 2.0)",
    long_description='A simple and powerful python library for file path construction and manipulation.',
