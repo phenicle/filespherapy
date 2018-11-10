@@ -117,19 +117,19 @@ class Filesphere(object):
 	def show(self):
 		print self.filepath
 
-	def get_filepath(self):
+	def filepath(self):
 		return self.filepath
 
-	def get_dirname(self):
+	def dirname(self):
 		return self.dirname
 
-	def get_basename(self):
+	def basename(self):
 		return self.basename
 
-	def get_stemname(self):
+	def stemname(self):
 		return self.stemname
 
-	def get_extname(self):
+	def extname(self):
 		return self.extname
 
 	def __repr__(self):
@@ -208,6 +208,13 @@ if __name__ == '__main__':
 	print "create sphere A from filepath"
 	fsphA = Filesphere(filepath='/my/dir/name/A/mystemnameA.myextnameA')
 	fsphA.show()
+	print
+
+	fsphA.filepath()
+	fsphA.dirname()
+	fsphA.basename()
+	fsphA.stemname()
+	fsphA.extname()
 	print
 
 	print "create sphere B from dirname, basename"
